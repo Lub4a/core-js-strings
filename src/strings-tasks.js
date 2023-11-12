@@ -20,7 +20,11 @@
  *   getStringLength(undefined) => 0
  */
 function getStringLength(value) {
-  return value.length;
+  let num = 0;
+  if (value === null || value === undefined) {
+    num = 0;
+  } else num = value.length;
+  return num;
 }
 
 /**
@@ -72,7 +76,7 @@ function concatenateStrings(value1, value2) {
  *   getFirstChar('') => ''
  */
 function getFirstChar(value) {
-  return value[0];
+  return value.slice(0, 1);
 }
 
 /**
@@ -181,8 +185,12 @@ function removeLastOccurrences(str, value) {
  *   sumOfCodes('') => 0
  *   sumOfCodes() => 0
  */
-function sumOfCodes(/* str */) {
-  throw new Error('Not implemented');
+function sumOfCodes(str) {
+  let sum = 0;
+  for (let i = 0; i < str.length; i += 1) {
+    sum += str.charCodeAt(i);
+  }
+  return sum;
 }
 
 /**
@@ -196,8 +204,8 @@ function sumOfCodes(/* str */) {
  *   startsWith('Hello World', 'World') => false
  *   startsWith('Hello World', 'Hello') => true
  */
-function startsWith(/* str, substr */) {
-  throw new Error('Not implemented');
+function startsWith(str, substr) {
+  return str.startsWith(substr);
 }
 
 /**
@@ -211,8 +219,8 @@ function startsWith(/* str, substr */) {
  *   endsWith('Hello World', 'World') => true
  *   endsWith('Hello World', 'Hello') => false
  */
-function endsWith(/* str, substr */) {
-  throw new Error('Not implemented');
+function endsWith(str, substr) {
+  return str.endsWith(substr);
 }
 
 /**
@@ -228,8 +236,13 @@ function endsWith(/* str, substr */) {
  *   formatTime(0, 45) => "00:45"
  *   formatTime(0, 0) => "00:00"
  */
-function formatTime(/* minutes, seconds */) {
-  throw new Error('Not implemented');
+function formatTime(minutes, seconds) {
+  const min = `0${minutes}`;
+  let sec = seconds;
+  if (seconds === 0 || seconds < 10) {
+    sec = `0${seconds}`;
+  }
+  return `${min}:${sec}`;
 }
 
 /**
@@ -294,11 +307,12 @@ function containsSubstring(str, substring) {
 function countVowels(str) {
   let sum = 0;
   for (let i = 0; i <= str.length; i += 1) {
-    sum += 1;
+    if (str[i].includes('aeiouy') || str[i].includes('AEIOUY')) {
+      sum += 1;
+    }
   }
   return sum;
 }
-
 /**
  * Returns true if the string is a palindrome; otherwise false.
  * https://en.wikipedia.org/wiki/Palindrome
@@ -338,8 +352,9 @@ function findLongestWord(/* sentence */) {}
  *   reverseWords('Hello World') => 'olleH dlroW'
  *   reverseWords('The Quick Brown Fox') => 'ehT kciuQ nworB xoF'
  */
-function reverseWords(/* str */) {}
-
+function reverseWords(str) {
+  return str.split(' ').reverse().join(' ');
+}
 /**
  * Inverts the case of each character in the given string.
  *
