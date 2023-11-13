@@ -170,7 +170,7 @@ function removeFirstOccurrences(str, value) {
  *   removeLastOccurrences('ABABAB', 'BA') => 'ABAB'.
  */
 function removeLastOccurrences(str, value) {
-  return str.replace(value, '');
+  return str.lastIndexOf(value, str.length - 1);
 }
 
 /**
@@ -256,7 +256,7 @@ function formatTime(minutes, seconds) {
  *   reverseString('12345') => '54321'
  */
 function reverseString(str) {
-  return str.split().reverse.join('');
+  return str.split().reverse().join('');
 }
 
 /**
@@ -287,7 +287,11 @@ function orderAlphabetically(str) {
  *   containsSubstring('12345', '34') => true
  */
 function containsSubstring(str, substring) {
-  return str.includes(substring);
+  let result = false;
+  if (str.indexOf(substring) !== -1) {
+    result = true;
+  }
+  return result;
 }
 
 /**
@@ -353,7 +357,12 @@ function findLongestWord(/* sentence */) {}
  *   reverseWords('The Quick Brown Fox') => 'ehT kciuQ nworB xoF'
  */
 function reverseWords(str) {
-  return str.split(' ').reverse().join(' ');
+  const str2 = str.split(' ').reverse().join(' ');
+  let str1 = '';
+  for (let i = str2.length - 1; i >= 0; i -= 1) {
+    str1 += str2[i];
+  }
+  return str1;
 }
 /**
  * Inverts the case of each character in the given string.
@@ -366,7 +375,18 @@ function reverseWords(str) {
  *   invertCase('JavaScript is Fun') => 'jAVASCRIPT IS fUN'
  *   invertCase('12345') => '12345'
  */
-function invertCase(/* str */) {}
+function invertCase(str) {
+  let str1 = '';
+  for (let i = 0; i < str.length; i += 1) {
+    const char = str[i];
+    if (char === char.toUpperCase()) {
+      str1 += char.toLowerCase();
+    } else {
+      str1 += char.toUpperCase();
+    }
+  }
+  return str1;
+}
 
 /**
  * Returns the result of string template and given parameters firstName and lastName.
